@@ -3,7 +3,7 @@ import Post from "../Post/Post"
 
 const Home = () => {
     const [posts, setPosts] =  useState([]);
-    const [comments, setComments] = useState([])
+    const [comments, setComments] = useState([]);
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
@@ -17,6 +17,7 @@ const Home = () => {
     posts.map((post) => {
         const commentsOfThisPost = comments.filter((comment) => post.id === comment.postId)
         post.comments = commentsOfThisPost;
+        post.avatar = 'https://xsgames.co/randomusers/avatar.php?g=male';
     })
 
   
@@ -24,12 +25,8 @@ const Home = () => {
     <>
     <h1>Your News feed</h1>
     {
-        posts.map((post) => {
-             return (<Post key={post.id} commentsOfThisPost={post.comments} post={post} />);
-         } )
+        posts.map(post => (<Post key={post.id} commentsOfThisPost={post.comments} post={post} />))
     }
-    
- 
     </>
   )
 }
