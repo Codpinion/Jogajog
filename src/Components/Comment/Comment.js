@@ -2,6 +2,10 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { Divider } from "@mui/material";
+export const nameStyle = {
+    fontSize: '18px',
+    fontWeight: '600'
+}
 const Comment = ({ commentsOfThisPost }) => {
   const { name, body } = commentsOfThisPost;
   function stringToColor(string) {
@@ -36,12 +40,12 @@ const Comment = ({ commentsOfThisPost }) => {
     <div className="single-comment">
       <Stack direction="row" spacing={2}>
         <Avatar {...stringAvatar(name.toUpperCase())} />
-          <p style={{fontSize: '18px', fontWeight: '600'}}>{name}</p>
+          <p style={nameStyle}>{name}</p>
       </Stack>
       <Divider textAlign="left">
         Comment
       </Divider>
-      <p>{body}</p>
+      <p style={{paddingLeft: '40px'}}>{body}</p>
     </div>
   );
 };

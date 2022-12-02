@@ -7,40 +7,45 @@ import Typography from "@mui/material/Typography";
 import Comments from "../Comments/Comments";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import Divider from '@mui/material/Divider';
-import Chip from '@mui/material/Chip';
+import Divider from "@mui/material/Divider";
+import { useNavigate } from "react-router-dom";
+import { nameStyle } from "../Comment/Comment";
 export const postStyle = {
   margin: "10px",
   borderRadius: "8px",
   padding: "0 10px",
 };
 const Post = (props) => {
-  const { body, title, avatar } = props.post;
+  const { id, body, title, avatar } = props.post;
+  const postUrl = `post/${id}`;
+  const navigation = useNavigate();
+  const handleNavigate = () => {
+    navigation(postUrl);
+  };
   return (
     <div className="post" style={postStyle}>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
-        <Stack direction="row" spacing={2}>
-        <Avatar src={avatar} />
-          <Typography sx={{ fontSize: 18 }} component="div">
-            {title}
-          </Typography>
-      </Stack>
+          <Stack direction="row" spacing={2}>
+            <Avatar src={avatar} />
+            <Typography style={nameStyle} sx={{ fontSize: 18 }} component="div">
+              {title}
+            </Typography>
+          </Stack>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             {body}
           </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
           <Divider textAlign="left">
-        <h4>Comments</h4> 
-      </Divider>
-        <Comments commentsOfThisPost = {props.commentsOfThisPost} />
+            <h4>Comments</h4>
+          </Divider>
+          <Comments commentsOfThisPost={props.commentsOfThisPost} />
         </CardContent>
         <CardActions>
-          <Button variant="contained" color="secondary">
+          <Button
+            onClick={handleNavigate}
+            variant="contained"
+            color="secondary"
+          >
             More Info
           </Button>
         </CardActions>
